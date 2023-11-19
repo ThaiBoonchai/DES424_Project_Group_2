@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypeboy Music - Courses</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hypeboy Music</h1>
+        <nav>
+            <ul>
+                <li><a href="index2.html">Courses</a></li>
+                <li><a href="purchase.html">My Purchases</a></li>
+                <li><a href="Modules.html">Modules</a></li>
+                <li><a href="#" onclick="openLoginModal()">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Available Courses</h2>
+        <div id="courses-list"></div>
+    </div>
+
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Confirm Purchase</h2>
+            <p>You are enrolling in the course: <span id="courseTitle"></span></p>
+            <button class="purchase-button" onclick="completePurchase()">Complete Purchase</button>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login</h2>
+            <form onsubmit="submitLoginForm(event)">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <p>Don't have an account? <a href="create-account.html">Create Account</a></p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Hypeboy Music. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
