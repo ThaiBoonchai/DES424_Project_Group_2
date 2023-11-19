@@ -1,0 +1,39 @@
+<!-- modules.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypeboy Music - Modules</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Hypeboy Music</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Courses</a></li>
+                <li><a href="purchase.html">My Purchases</a></li>
+                <li><a href="modules.html">Modules</a></li>
+                <li>User</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Modules</h2>
+        <p>Enter your course ID to access the modules:</p>
+        <form id="moduleForm" onsubmit="return getModules()">
+            <label for="courseId">Course ID:</label>
+            <input type="text" id="courseId" name="courseId" required>
+            <button type="submit">Get Modules</button>
+        </form>
+
+        <!-- Display the retrieved modules here -->
+        <div id="moduleContent"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
