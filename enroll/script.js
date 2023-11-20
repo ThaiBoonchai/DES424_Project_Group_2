@@ -128,12 +128,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.getModules = function () {
         const courseId = document.getElementById("courseId").value;
-
+        
         // Validate the input (you may add more validation as needed)
         if (!courseId) {
             alert("Please enter a valid course ID.");
             return false;
         }
+
 
         // Simulate fetching modules from the server (replace with actual API call)
         const modules = fetchModulesFromServer(courseId);
@@ -211,7 +212,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const purchasedCourses = [
-    { id: 1, title: "Music Production 101" , accessCode: generateKey() },
+    { id: 1, title: "Music Production 101" , accessCode: "GtSWVU8n"},
+    { id: 2, title: "Band Management Strategies" , accessCode: "qEm6BPaQ"},
+    { id: 3, title: "Guitar Mastery Workshop" , accessCode: "7sL0jR8r"},
+    { id: 4, title: "Songwriting Fundamentals" , accessCode: "2dURNMTA"},
+    { id: 5, title: "Live Performance Techniques" , accessCode: "bwzdAi5r"},
+    { id: 6, title: "Electronic Music Production" , accessCode: "RBFw29Qf"},
     // Add more courses if needed
   ];
 
@@ -223,26 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
     purchasedCoursesList.appendChild(listItem);
   });
 });
-
-function generateKey() {
-  // Length of the key
-  var keyLength = 8;
-
-  // Characters to use in the key
-  var charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  // Initialize the key
-  var key = "";
-
-  // Generate random characters to form the key
-  for (var i = 0; i < keyLength; i++) {
-    var randomIndex = Math.floor(Math.random() * charset.length);
-    key += charset.charAt(randomIndex);
-  }
-
-  return key;
-}
-
 document.getElementById("modulesButton").addEventListener("click", function () {
     window.location.href = "Modules.html";
   });
