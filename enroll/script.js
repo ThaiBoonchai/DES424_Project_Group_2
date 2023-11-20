@@ -203,3 +203,37 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // ... (other functions) ...
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const purchasedCourses = [
+    { id: 1, title: "Music Production 101", accessCode: generateKey() },
+    // Add more courses if needed
+  ];
+
+  const purchasedCoursesList = document.getElementById("purchased-courses-list");
+
+  purchasedCourses.forEach(course => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `<strong>${course.title}</strong> - Access Code: ${course.accessCode}`;
+    purchasedCoursesList.appendChild(listItem);
+  });
+});
+
+function generateKey() {
+  // Length of the key
+  var keyLength = 8;
+
+  // Characters to use in the key
+  var charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+  // Initialize the key
+  var key = "";
+
+  // Generate random characters to form the key
+  for (var i = 0; i < keyLength; i++) {
+    var randomIndex = Math.floor(Math.random() * charset.length);
+    key += charset.charAt(randomIndex);
+  }
+
+  return key;
+}
