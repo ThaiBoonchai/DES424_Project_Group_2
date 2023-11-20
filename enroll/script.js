@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.enroll = function (courseId, courseTitle) {
         document.getElementById("courseTitle").innerText = courseTitle;
         openModal("purchaseModal");
+
     };
 
     function openModal(modalId) {
@@ -38,6 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
     window.completePurchase = function () {
         alert("Purchase completed!");
         closeModal("purchaseModal");
+        // Redirect to Modules.html
+        window.location.href = "purchase.html";
+        
+        
     };
 
     window.openLoginModal = function () {
@@ -206,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const purchasedCourses = [
-    { id: 1, title: "Music Production 101", accessCode: generateKey() },
+    { id: 1, title: "Music Production 101" , accessCode: generateKey() },
     // Add more courses if needed
   ];
 
@@ -237,3 +242,7 @@ function generateKey() {
 
   return key;
 }
+
+document.getElementById("modulesButton").addEventListener("click", function () {
+    window.location.href = "Modules.html";
+  });
