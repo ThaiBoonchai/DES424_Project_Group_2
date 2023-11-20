@@ -81,100 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return false;
     };
-
-    window.getModules = function () {
-        const courseId = document.getElementById("courseId").value;
-
-        // Validate the input (you may add more validation as needed)
-        if (!courseId) {
-            alert("Please enter a valid course ID.");
-            return false;
-        }
-
-        // Simulate fetching modules from the server (replace with actual API call)
-        const modules = fetchModulesFromServer(courseId);
-
-        // Display the retrieved modules (you may format and display them as needed)
-        displayModules(modules);
-
-        return false;
-    };
-
-    // Simulated function to fetch modules from the server (replace with actual API call)
-    function fetchModulesFromServer(courseId) {
-        // This is a placeholder. In a real-world scenario, you would make an API call to fetch the modules.
-        // For demonstration purposes, let's assume a static set of modules.
-        if (courseId === "MP101-ABC123") {
-            return {
-                video: "Video URL for Music Production 101",
-                pdf: "PDF URL for Music Production 101",
-                homework: "Homework Assignment for Music Production 101"
-            };
-        } else {
-            return {}; // Return an empty object for unknown course IDs
-        }
-    }
-
-    // Function to display modules (you may format and display them as needed)
-    function displayModules(modules) {
-        const moduleContent = document.getElementById("moduleContent");
-        moduleContent.innerHTML = `
-            <h3>Modules for ${document.getElementById("courseId").value}</h3>
-            <p>Video: <a href="${modules.video}" target="_blank">Watch Video</a></p>
-            <p>PDF: <a href="${modules.pdf}" target="_blank">View PDF</a></p>
-            <p>Homework Assignment: <a href="${modules.homework}" target="_blank">Download Assignment</a></p>
-        `;
-    }
-
-    window.getModules = function () {
-        const courseId = document.getElementById("courseId").value;
-        
-        // Validate the input (you may add more validation as needed)
-        if (!courseId) {
-            alert("Please enter a valid course ID.");
-            return false;
-        }
-
-
-        // Simulate fetching modules from the server (replace with actual API call)
-        const modules = fetchModulesFromServer(courseId);
-
-        // Display the retrieved modules in lecture.html
-        displayModulesInLecture(modules);
-
-        // Redirect to lecture.html
-        window.location.href = "lecture.html";
-
-        return false;
-    };
-
-    // Simulated function to fetch modules from the server (replace with actual API call)
-    function fetchModulesFromServer(courseId) {
-        // This is a placeholder. In a real-world scenario, you would make an API call to fetch the modules.
-        // For demonstration purposes, let's assume a static set of modules.
-        if (courseId === "MP101-ABC123") {
-            return {
-                video: "Video URL for Music Production 101",
-                pdf: "PDF URL for Music Production 101",
-                homework: "Homework Assignment for Music Production 101"
-            };
-        } else {
-            return {}; // Return an empty object for unknown course IDs
-        }
-    }
-
-    // Function to display modules in lecture.html
-// Function to display modules in lecture.html
-function displayModulesInLecture(modules) {
-    const lectureContent = document.getElementById("lectureContent");
-    lectureContent.innerHTML = `
-        <h3>Modules for ${document.getElementById("courseId").value}</h3>
-        <p>Video: <a href="${modules.video}" download="video.mp4">Watch Video</a></p>
-        <p>PDF: <a href="${modules.pdf}" download="document.pdf">View PDF</a></p>
-        <p>Homework Assignment: <a href="${modules.homework}" download="homework.txt">Download Assignment</a></p>
-    `;
-}
-
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -195,19 +101,36 @@ document.addEventListener("DOMContentLoaded", function () {
         closeLoginModal();
     };
 
-    // ... (other functions) ...
 });
-
 document.addEventListener("DOMContentLoaded", function () {
-    // ... (your existing code) ...
+
+    // Array of allowed course IDs and their corresponding lecture pages
+    var courseToLectureMap = {
+        "GtSWVU8n": "lecture1.html",
+        "qEm6BPaQ": "lecture2.html",
+        "7sL0jR8r": "lecture3.html",
+        "2dURNMTA": "lecture4.html",
+        "bwzdAi5r": "lecture5.html",
+        "RBFw29Qf": "lecture6.html"
+    };
 
     window.getModules = function () {
-        // Redirect to lecture.html
-        window.location.href = "lecture.html";
+        // Get the entered course ID
+        var enteredCourseId = document.getElementById("courseId").value;
+
+        // Check if the entered course ID is in the map
+        if (courseToLectureMap.hasOwnProperty(enteredCourseId)) {
+            // Redirect to the corresponding lecture page
+            window.location.href = courseToLectureMap[enteredCourseId];
+        } else {
+            // Display an error message or handle the rejection in some way
+            alert("Invalid Course ID. Please enter a valid Course ID.");
+        }
+
+        // Prevent the form from submitting
         return false;
     };
-    
-    // ... (other functions) ...
+
 });
 
 document.addEventListener("DOMContentLoaded", function () {
