@@ -25,11 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
     window.enroll = function (courseId, courseTitle) {
         document.getElementById("courseTitle").innerText = courseTitle;
         openModal("purchaseModal");
+
     };
 
     function openModal(modalId) {
         document.getElementById(modalId).style.display = "block";
     }
+
 
     window.closeModal = function (modalId) {
         document.getElementById(modalId).style.display = 'none';
@@ -38,6 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
     window.completePurchase = function () {
         alert("Purchase completed!");
         closeModal("purchaseModal");
+
+        // Redirect to Modules.html
+        window.location.href = "purchase.html";
+        
+
     };
 
     window.openLoginModal = function () {
@@ -50,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.submitLoginForm = function (event) {
         event.preventDefault();
+
     
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
@@ -94,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
     
-    
+
     window.createAccount = function () {
         const username = document.getElementById("username").value;
         const email = document.getElementById("email").value;
@@ -112,107 +120,77 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return false;
     };
+});
 
-    window.getModules = function () {
-        const courseId = document.getElementById("courseId").value;
+document.addEventListener("DOMContentLoaded", function () {
+    // ... (your existing code) ...
 
-        // Validate the input (you may add more validation as needed)
-        if (!courseId) {
-            alert("Please enter a valid course ID.");
-            return false;
-        }
+    window.submitLoginForm = function (event) {
+        event.preventDefault();
+        
+        // Add your login logic here (validate credentials, make API call, etc.)
+        // For demonstration purposes, let's assume successful login
+        const username = document.getElementById("username").value;
+        sessionStorage.setItem('loggedInUser', username);
 
-        // Simulate fetching modules from the server (replace with actual API call)
-        const modules = fetchModulesFromServer(courseId);
-
-        // Display the retrieved modules (you may format and display them as needed)
-        displayModules(modules);
-
-        return false;
+        alert("Login successful!");
+        // Redirect to index2.html after successful login
+        window.location.href = "index2.html";
+        // You may perform other actions after successful login if needed
+        closeLoginModal();
     };
 
-    // Simulated function to fetch modules from the server (replace with actual API call)
-    function fetchModulesFromServer(courseId) {
-        // This is a placeholder. In a real-world scenario, you would make an API call to fetch the modules.
-        // For demonstration purposes, let's assume a static set of modules.
-        if (courseId === "MP101-ABC123") {
-            return {
-                video: "Video URL for Music Production 101",
-                pdf: "PDF URL for Music Production 101",
-                homework: "Homework Assignment for Music Production 101"
-            };
-        } else {
-            return {}; // Return an empty object for unknown course IDs
-        }
-    }
+});
+document.addEventListener("DOMContentLoaded", function () {
 
-    // Function to display modules (you may format and display them as needed)
-    function displayModules(modules) {
-        const moduleContent = document.getElementById("moduleContent");
-        moduleContent.innerHTML = `
-            <h3>Modules for ${document.getElementById("courseId").value}</h3>
-            <p>Video: <a href="${modules.video}" target="_blank">Watch Video</a></p>
-            <p>PDF: <a href="${modules.pdf}" target="_blank">View PDF</a></p>
-            <p>Homework Assignment: <a href="${modules.homework}" target="_blank">Download Assignment</a></p>
-        `;
-    }
-
-    window.getModules = function () {
-        const courseId = document.getElementById("courseId").value;
-
-        // Validate the input (you may add more validation as needed)
-        if (!courseId) {
-            alert("Please enter a valid course ID.");
-            return false;
-        }
-
-        // Simulate fetching modules from the server (replace with actual API call)
-        const modules = fetchModulesFromServer(courseId);
-
-        // Display the retrieved modules in lecture.html
-        displayModulesInLecture(modules);
-
-        // Redirect to lecture.html
-        window.location.href = "lecture.html";
-
-        return false;
+    // Array of allowed course IDs and their corresponding lecture pages
+    var courseToLectureMap = {
+        "GtSWVU8n": "lecture1.html",
+        "qEm6BPaQ": "lecture2.html",
+        "7sL0jR8r": "lecture3.html",
+        "2dURNMTA": "lecture4.html",
+        "bwzdAi5r": "lecture5.html",
+        "RBFw29Qf": "lecture6.html"
     };
 
-    // Simulated function to fetch modules from the server (replace with actual API call)
-    function fetchModulesFromServer(courseId) {
-        // This is a placeholder. In a real-world scenario, you would make an API call to fetch the modules.
-        // For demonstration purposes, let's assume a static set of modules.
-        if (courseId === "MP101-ABC123") {
-            return {
-                video: "Video URL for Music Production 101",
-                pdf: "PDF URL for Music Production 101",
-                homework: "Homework Assignment for Music Production 101"
-            };
+    window.getModules = function () {
+        // Get the entered course ID
+        var enteredCourseId = document.getElementById("courseId").value;
+
+        // Check if the entered course ID is in the map
+        if (courseToLectureMap.hasOwnProperty(enteredCourseId)) {
+            // Redirect to the corresponding lecture page
+            window.location.href = courseToLectureMap[enteredCourseId];
         } else {
-            return {}; // Return an empty object for unknown course IDs
+            // Display an error message or handle the rejection in some way
+            alert("Invalid Course ID. Please enter a valid Course ID.");
         }
-    }
 
-    // Function to display modules in lecture.html
-// Function to display modules in lecture.html
-function displayModulesInLecture(modules) {
-    const lectureContent = document.getElementById("lectureContent");
-    lectureContent.innerHTML = `
-        <h3>Modules for ${document.getElementById("courseId").value}</h3>
-        <p>Video: <a href="${modules.video}" download="video.mp4">Watch Video</a></p>
-        <p>PDF: <a href="${modules.pdf}" download="document.pdf">View PDF</a></p>
-        <p>Homework Assignment: <a href="${modules.homework}" download="homework.txt">Download Assignment</a></p>
-    `;
-}
-
-window.getModules = function () {
-    // Redirect to lecture.html
-    window.location.href = "lecture.html";
-    return false;
-};
+        // Prevent the form from submitting
+        return false;
+    };
 
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const purchasedCourses = [
+    { id: 1, title: "Music Production 101" , accessCode: "GtSWVU8n"},
+    { id: 2, title: "Band Management Strategies" , accessCode: "qEm6BPaQ"},
+    { id: 3, title: "Guitar Mastery Workshop" , accessCode: "7sL0jR8r"},
+    { id: 4, title: "Songwriting Fundamentals" , accessCode: "2dURNMTA"},
+    { id: 5, title: "Live Performance Techniques" , accessCode: "bwzdAi5r"},
+    { id: 6, title: "Electronic Music Production" , accessCode: "RBFw29Qf"},
+    // Add more courses if needed
+  ];
 
+  const purchasedCoursesList = document.getElementById("purchased-courses-list");
 
-
+  purchasedCourses.forEach(course => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `<strong>${course.title}</strong> - Access Code: ${course.accessCode}`;
+    purchasedCoursesList.appendChild(listItem);
+  });
+});
+document.getElementById("modulesButton").addEventListener("click", function () {
+    window.location.href = "Modules.html";
+  });
