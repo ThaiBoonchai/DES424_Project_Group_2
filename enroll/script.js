@@ -32,17 +32,19 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById(modalId).style.display = "block";
     }
 
-    function closeModal(modalId) {
-        document.getElementById(modalId).style.display = "none";
-    }
+
+    window.closeModal = function (modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    };
 
     window.completePurchase = function () {
         alert("Purchase completed!");
         closeModal("purchaseModal");
+
         // Redirect to Modules.html
         window.location.href = "purchase.html";
         
-        
+
     };
 
     window.openLoginModal = function () {
@@ -55,14 +57,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.submitLoginForm = function (event) {
         event.preventDefault();
-        // Add your login logic here (validate credentials, make API call, etc.)
-        // For demonstration purposes, let's assume successful login
-        alert("Login successful!");
-        // Redirect to index2.html after successful login
-        window.location.href = "index2.html";
-        // You may perform other actions after successful login if needed
-        closeLoginModal();
+
+    
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+    
+        // Validate input (you may add more validation as needed)
+        if (!username || !password) {
+            alert("Please enter both username and password.");
+            return;
+        }
+    
+        // Send a POST request to the server for authentication
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Check the response from the server
+            if (data.success) {
+                // Login successful
+                alert("Login successful!");
+                // Redirect to index2.html after successful login
+                window.location.href = "index2.html";
+                // You may perform other actions after successful login if needed
+                closeLoginModal();
+            } else {
+                // Login failed
+                alert("Invalid username or password");
+            }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            closeLoginModal();
+        });
     };
+    
 
     window.createAccount = function () {
         const username = document.getElementById("username").value;
